@@ -16,7 +16,7 @@
 <xsd:annotation> 
    <xsd:documentation>
 
-        Copyright 2016 MESA International, Version 0700
+        Copyright 2012 MESA International 
 		All Rights Reserved. http://www.mesa.org
 
         This MESA International work (including specifications, documents, 
@@ -26,8 +26,8 @@
 
         Permission to use, copy, modify, or redistribute this Work and its 
         documentation, with or without modification, for any purpose and 
-        without fee or royalty is hereby granted provided MESA International 
-        is acknowledged as the originator of this Work using the 
+        without fee or royalty is hereby granted provided the World Batch 
+        Forum is acknowledged as the originator of this Work using the 
         following statement:
 
         "The Business To Manufacturing Markup Language (B2MML) is used 
@@ -48,16 +48,9 @@
   
       Revision History
 
-        Ver     Date            Person          Note
-        ---     ----            ------          ----
-        v0300   26 Aug 2005     D. Emerson      This schema is new to B2MML in v0300.
-                                                This schema contains placeholders for
-                                                substitution groups in the other schemas.
-        v0301   29 Dec 2005     D. Brandl       Changed version to v0301
-        v04     04 Jun 2007     D. Brandl       Added transaction elements for ISA 95 Part 5 support.
-        V0500   26 Mar 2011     D. Brandl       Revised version
-        V0600   17 Mar 2013     D. Brandl       Changed copyright to MESA International and support for ISA 95 Part 4                                 
-        V0700   08 Aug 2016     D. Brandl       Updated Version
+        Ver           Date            Person          Note
+        ---           ----            ------          ----
+        BHPBilliton   22 Jun 2015     B. Poole        This is a BHPBilliton specific branch of V0600
 
    </xsd:documentation>
 </xsd:annotation>
@@ -237,33 +230,6 @@ of elements when used in an XML document.
                 </xsd:sequence>
         </xsd:group>
 
-        <xsd:group name = "MaterialTestSpecification">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "TestedMaterialClassProperty">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "TestedMaterialDefinitionProperty">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "TestedMaterialLotProperty">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-
-
-
 <!-- B2MML extension groups for Personnel schema-->
 
         <xsd:group name = "PersonnelInformation">
@@ -391,6 +357,7 @@ of elements when used in an XML document.
         <xsd:group name = "OperationsDefinition">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="Status" type="b2mml:StatusType" minOccurs="0" maxOccurs="1"/>
                 </xsd:sequence>
         </xsd:group>
 
@@ -409,12 +376,16 @@ of elements when used in an XML document.
         <xsd:group name = "OperationsMaterialBill">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="Version" type="b2mml:VersionType"  minOccurs="0" maxOccurs="1"/>
+                        <xsd:element name="TotalQuantity" type="b2mml:QuantityValueType"  minOccurs="0" maxOccurs="unbounded"/>
                 </xsd:sequence>
         </xsd:group>
 
         <xsd:group name = "OperationsBillOfMaterialItem">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="ReleaseType" type="b2mml:CodeType"  minOccurs="0" maxOccurs="1"/>
+                        <xsd:element name="PhantomType" type="b2mml:CodeType"  minOccurs="0" maxOccurs="1"/>
                 </xsd:sequence>
         </xsd:group>
 
@@ -774,6 +745,7 @@ of elements when used in an XML document.
         <xsd:group name = "OperationsRequest">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="Audit" type="AuditType"/>
                 </xsd:sequence>
         </xsd:group>
 
@@ -786,6 +758,7 @@ of elements when used in an XML document.
         <xsd:group name = "OpSegmentRequirement">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="Audit" type="AuditType"/>
                 </xsd:sequence>
         </xsd:group>
 
@@ -973,53 +946,7 @@ of elements when used in an XML document.
         </xsd:group>
 
 
- <!-- B2MML extension groups for WorkCalendar schemas  -->
-
-        <xsd:group name = "WorkCalendarInformation">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendarDefinition">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendarDefinitionEntry">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendarDefinitionProperty">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendar">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendarEntry">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        <xsd:group name = "WorkCalendarProperty">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        
-        
- <!-- B2MML extension groups for WorkCapability schemas  -->
+        <!-- B2MML extension groups for WorkCapability schemas  -->
 
         <xsd:group name = "WorkCapabilityInformation">
                 <xsd:sequence>
@@ -1129,15 +1056,6 @@ of elements when used in an XML document.
                 </xsd:sequence>
         </xsd:group>
 
- <!-- B2MML extension groups for WorkRecord schemas  -->
-
-        <xsd:group name = "WorkRecord">
-                <xsd:sequence>
-                        <!-- add extended elements here -->
-                </xsd:sequence>
-        </xsd:group>
-
-        
 <!-- B2MML extension groups for WorkSchedule and JobList schemas  -->
 
         <xsd:group name = "WorkSchedule">
@@ -1163,8 +1081,30 @@ of elements when used in an XML document.
                         <!-- add extended elements here -->
                 </xsd:sequence>
         </xsd:group>
+		
+		<xsd:group name = "MaterialTestSpecification">
+                <xsd:sequence>
+                        <!-- add extended elements here -->
+                </xsd:sequence>
+        </xsd:group>
 
+        <xsd:group name = "TestedMaterialClassProperty">
+                <xsd:sequence>
+                        <!-- add extended elements here -->
+                </xsd:sequence>
+        </xsd:group>
 
+        <xsd:group name = "TestedMaterialDefinitionProperty">
+                <xsd:sequence>
+                        <!-- add extended elements here -->
+                </xsd:sequence>
+        </xsd:group>
 
- 
+        <xsd:group name = "TestedMaterialLotProperty">
+                <xsd:sequence>
+                        <!-- add extended elements here -->
+                </xsd:sequence>
+        </xsd:group>  
+        
+
 </xsd:schema>

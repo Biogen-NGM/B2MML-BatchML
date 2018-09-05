@@ -22,7 +22,7 @@
 <xsd:annotation> 
    <xsd:documentation>
 
-        Copyright 2016 MESA International, Version 0700
+        Copyright 2012 MESA International 
 		All Rights Reserved. http://www.mesa.org
 
         This MESA International work (including specifications, documents, 
@@ -32,8 +32,8 @@
 
         Permission to use, copy, modify, or redistribute this Work and its 
         documentation, with or without modification, for any purpose and 
-        without fee or royalty is hereby granted provided MESA International 
-        is acknowledged as the originator of this Work using the 
+        without fee or royalty is hereby granted provided the World Batch 
+        Forum is acknowledged as the originator of this Work using the 
         following statement:
 
         "The Business To Manufacturing Markup Language (B2MML) is used 
@@ -50,36 +50,14 @@
         Part 5: Business to Manufacturing Transactions.  
    </xsd:documentation>
 
-   <xsd:documentation> 
+   <xsd:documentation>
 
-      Revision History
+     Revision History
 
-        Ver     Date            Person          Note
-        ---     ----            ------          ----
-        V01     7 Apr 2002      D. Emerson      Initial release  
-        V02     23 Sept 2003    D. Emerson      Updated filename for V02
-                                                Added Location to EquipmentType
-                                                Changed ##any to "Any" element of type "AnyType"
-                                                Added revision to namespace
-        v0300   26 Aug 2005     D. Emerson      Added substitution groups.  One group added just
-                                                before each Any element.
-        v0301   29 Dec 2005     D. Brandl       Changed version number to v0301
-        v04     04 Jun 2007     D. Brandl       Added transaction elements for ISA 95 Part 5 support.
-                                                Added "cc:" namespace for UN/CEFACT core types.
-                                                Added the UN/CEFACT core components with optional attributes
-                                                and made them the base types for the B2MML types. 
-                                                Added warning before each use of the AnyType that the extension 
-                                                schema should be used instead of the Any element and that in a 
-                                                still to be determined future release of B2MML the AnyType and 
-                                                Any element will be removed.
-        V0500   26 Mar 2011     D. Brandl       Revised version
-											    Removed "Any" element type, replaced with extended types for user extensions
-											    Changed "Location" element name to "HierarchyScope"
-											    Removed Maintenance elements
-											    Added EquipmentCapabilityTestSpecificationID to Equipment and EquipmentClass
-        V0600   17 Mar 2013     D. Brandl       Changed copyright to MESA International and support for ISA 95 Part 4                                 
-        V0700   08 Aug 2016     D. Brandl       Updated Version
- 
+     Ver           Date            Person          Note
+     ---           ----            ------          ----
+     BHPBilliton   22 Jun 2015     B. Poole        This is a BHPBilliton specific branch of V0600
+     BHPBilliton   21 Sep 2016     B. Poole        Add EquipmentCapabilityTestSpecification to EquipmentCapabilityTestSpecificationType as per comment
 
    </xsd:documentation>
 </xsd:annotation>
@@ -251,24 +229,11 @@
 
   <xsd:complexType name = "EquipmentCapabilityTestSpecificationType">
     <xsd:sequence>
-      <xsd:element name = "Name"                type = "NameType"/>
-      <xsd:element name = "Description"         type = "DescriptionType"
+      <xsd:group   ref  = "TestSpecificationType"/>
+      <xsd:element name = "EquipmentCapabilityTestSpecification"  
+                                                type = "EquipmentCapabilityTestSpecificationType"
                                                 minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "Version"             type = "VersionType"
-                                                minOccurs = "0"/>
-      <!-- Location ELEMENT IS DEPRECATED and may be removed in a future release, use HierarchyScope instead -->
-      <xsd:element name = "Location"            type="LocationType" 
-	                                            minOccurs="0"/> 
-      <xsd:element name = "HierarchyScope"      type = "HierarchyScopeType"   
-                                                minOccurs = "0" />
-      <xsd:element name = "TestedEquipmentProperty"     
-                                                type = "TestedEquipmentPropertyType"
-                                                minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "TestedEquipmentClassProperty" 
-                                                type = "TestedEquipmentClassPropertyType"
-                                                minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:group   ref  = "Extended:EquipmentCapabilityTestSpecification" 
-                                                minOccurs = "0" maxOccurs = "1"/>
+      <xsd:group   ref  = "Extended:EquipmentCapabilityTestSpecification"         minOccurs = "0" maxOccurs = "1"/>
     </xsd:sequence>
   </xsd:complexType>
 

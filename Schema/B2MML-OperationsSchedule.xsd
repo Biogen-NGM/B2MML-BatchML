@@ -7,21 +7,23 @@
                 elementFormDefault   = "qualified"
                 attributeFormDefault = "unqualified">
         
-<!-- Import the Extension Schema into the 'Extended' namespace    -->
-
-<xsd:import     namespace="http://www.mesa.org/xml/B2MML-AllExtensions" 
-                schemaLocation="B2MML-AllExtensions.xsd"/>
 
 <!-- Include the Common schema and OpSegmentResponseType definition  -->
 
   <xsd:include  schemaLocation = "B2MML-Common.xsd"/>
   <xsd:include  schemaLocation = "B2MML-OperationsPerformanceTypes.xsd"/> 
+  <xsd:include  schemaLocation = "B2MML-OperationsDefinition.xsd"/>
+  
+<!-- Import the Extension Schema into the 'Extended' namespace    
 
+<xsd:import     namespace="http://www.mesa.org/xml/B2MML-AllExtensions" 
+                schemaLocation="B2MML-AllExtensions.xsd"/>
+-->
 
 <xsd:annotation> 
    <xsd:documentation>
 
-        Copyright 2016 MESA International, Version 0700
+        Copyright 2012 MESA International 
 		All Rights Reserved. http://www.mesa.org
 
         This MESA International work (including specifications, documents, 
@@ -31,8 +33,8 @@
 
         Permission to use, copy, modify, or redistribute this Work and its 
         documentation, with or without modification, for any purpose and 
-        without fee or royalty is hereby granted provided MESA International 
-        is acknowledged as the originator of this Work using the 
+        without fee or royalty is hereby granted provided the World Batch 
+        Forum is acknowledged as the originator of this Work using the 
         following statement:
 
         "The Business To Manufacturing Markup Language (B2MML) is used 
@@ -53,14 +55,12 @@
   
       Revision History
 
-        Ver     Date            Person          Note
-        ---     ----            ------          ----
-        V0500   26 Mar 2011     D. Brandl       Initial version
-        V0600   17 Mar 2013     D. Brandl       Changed copyright to MESA International and support for ISA 95 Part 4                                 
-                                                Modified OpMaterialRequirementPropertyType to make it recursive like MaterialDefinitionProperty
-        V0700   08 Aug 2016     D. Brandl       Updated Version
-                                                Added OperationsSegmentID to OperationsRequestType
-                                                Added OperationsSegmentID to OpSegmentRequirementType
+        Ver           Date            Person          Note
+        ---           ----            ------          ----
+        BHPBilliton   22 Jun 2015     B. Poole        This is a BHPBilliton specific branch of V0600
+        BHPBilliton   05 Apr 2016     C. Gifford      Add a OperationsSegmentID to the OpSegmentRequirementType (as per WD01 p 100)       
+        Biogen V1.0   04 Sep 2018     S. Dattenny     Replaced OperationsDefinitionIDType by OperationsDefinitionType. It allows using IDs and the object content too without using additional properties.
+        
 
    </xsd:documentation>
 </xsd:annotation>
@@ -124,9 +124,7 @@
                                                         minOccurs = "0"/>
       <xsd:element name = "Priority"                    type = "PriorityType" 
                                                         minOccurs = "0"/>
-      <xsd:element name = "OperationsDefinitionID"      type = "OperationsDefinitionIDType"    
-                                                        minOccurs = "0"/>
-      <xsd:element name = "OperationsSegmentID"         type = "OperationsSegmentIDType"    
+      <xsd:element name = "OperationsDefinition"      type = "OperationsDefinitionType"    
                                                         minOccurs = "0"/>
       <xsd:element name = "RequestState"                type = "RequestStateType"
                                                         minOccurs = "0"/>
@@ -150,16 +148,16 @@
                                                         minOccurs = "0"/>
       <xsd:element name = "ProcessSegmentID"            type = "ProcessSegmentIDType" 
 	                                                    minOccurs = "0"/>
+	  <xsd:element name = "OperationsSegmentID"         type = "OperationsSegmentIDType" 
+	                                                    minOccurs = "0"/>
       <xsd:element name = "EarliestStartTime"           type = "EarliestStartTimeType"  
                                                         minOccurs = "0"/>
       <xsd:element name = "LatestEndTime"               type = "LatestEndTimeType"      
                                                         minOccurs = "0"/>
       <xsd:element name = "Duration"                    type = "DurationType"           
                                                         minOccurs = "0"/>
-      <xsd:element name = "OperationsDefinitionID"      type = "OperationsDefinitionIDType" 
+      <xsd:element name = "OperationsDefinition"      type = "OperationsDefinitionType" 
 	                                                    minOccurs = "0"/>
-      <xsd:element name = "OperationsSegmentID"         type = "OperationsSegmentIDType"    
-                                                        minOccurs = "0"/>
       <xsd:element name = "SegmentState"                type = "RequestStateType"
                                                         minOccurs = "0"/>
       <xsd:element name = "SegmentParameter"            type = "ParameterType" 

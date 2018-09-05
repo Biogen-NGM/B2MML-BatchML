@@ -10,12 +10,12 @@
 <!-- Include the Core Components schema in the default namespace -->
 
   <xsd:include
-            schemaLocation         = "B2MML-CoreComponents.xsd"/>
-
+            schemaLocation         = "B2MML-CoreComponentsExtensions.xsd"/>
+            
 <xsd:annotation> 
    <xsd:documentation>
 
-        Copyright 2016 MESA International, Version 0700
+        Copyright 2012 MESA International 
 		All Rights Reserved. http://www.mesa.org
 
         This MESA International work (including specifications, documents, 
@@ -25,8 +25,8 @@
 
         Permission to use, copy, modify, or redistribute this Work and its 
         documentation, with or without modification, for any purpose and 
-        without fee or royalty is hereby granted provided MESA International 
-       is acknowledged as the originator of this Work using the 
+        without fee or royalty is hereby granted provided the World Batch 
+        Forum is acknowledged as the originator of this Work using the 
         following statement:
 
         "The Business To Manufacturing Markup Language (B2MML) is used 
@@ -47,13 +47,10 @@
   
       Revision History
 
-        Ver     Date            Person          Note
-        ---     ----            ------          ----
-        v04     04 Jun 2007     D. Brandl       Added transaction elements for ISA 95 Part 5 support.
-        V0500   26 Mar 2011     D. Brandl       Revised version
-        V0600   17 Mar 2013     D. Brandl       Changed copyright to MESA International and support for ISA 95 Part 4
-                                                Moved OpXXXXX elements from Extensions to Common Extensions
-        V0700   08 Aug 2016     D. Brandl       Updated Version
+        Ver           Date            Person          Note
+        ---           ----            ------          ----
+        BHPBilliton   22 Jun 2015     B. Poole        This is a BHPBilliton specific branch of V0600
+        Biogen        04 May 2018     S. Dattenny     Added MeasurementComparisonOperator extension element to Measurement Property Extension group
 
    </xsd:documentation>
 </xsd:annotation>
@@ -77,7 +74,28 @@ of elements when used in an XML document.
 -->
 
 
+    <xsd:complexType name="EnabledDateType">
+        <xsd:simpleContent>
+            <xsd:restriction base="DateTimeType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="DisabledDateType">
+        <xsd:simpleContent>
+            <xsd:restriction base="DateTimeType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+  <xsd:complexType name="AuditType">
+    <xsd:sequence>
+      <xsd:element name="CreatedBy" type="NameType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="LastUpdatedBy" type="NameType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="CreatedByDate" type="DateTimeType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="LastUpdatedByDate" type="DateTimeType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
 
+    
 <!-- B2MML extension groups for Common schema-->
 
         <xsd:group name = "EquipmentAssetMapping">
@@ -326,6 +344,7 @@ of elements when used in an XML document.
         <xsd:group name = "OpMaterialRequirement">
                 <xsd:sequence>
                         <!-- add extended elements here -->
+                        <xsd:element name="Audit" type="AuditType"/>
                 </xsd:sequence>
         </xsd:group>
 
@@ -335,7 +354,17 @@ of elements when used in an XML document.
                 </xsd:sequence>
         </xsd:group>
 
-
-        
+        <xsd:group name="OperationsEventClass">
+          <xsd:sequence>
+            <!-- add extended elements here -->
+          </xsd:sequence>
+        </xsd:group>
+       
+        <xsd:group name = "PropertyMeasurement">
+                <xsd:sequence>
+                        <!-- add extended elements here -->
+                        <xsd:element name="MeasurementComparisonOperator" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+        </xsd:group> 
         
  </xsd:schema>

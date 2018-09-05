@@ -20,7 +20,7 @@
 <xsd:annotation> 
    <xsd:documentation>
 
-        Copyright 2016 MESA International, Version 0700
+        Copyright 2012 MESA International 
 		All Rights Reserved. http://www.mesa.org
 
         This MESA International work (including specifications, documents, 
@@ -30,8 +30,8 @@
 
         Permission to use, copy, modify, or redistribute this Work and its 
         documentation, with or without modification, for any purpose and 
-        without fee or royalty is hereby granted provided MESA International 
-        is acknowledged as the originator of this Work using the 
+        without fee or royalty is hereby granted provided the World Batch 
+        Forum is acknowledged as the originator of this Work using the 
         following statement:
 
         "The Business To Manufacturing Markup Language (B2MML) is used 
@@ -52,10 +52,9 @@
 
       Revision History
 
-        Ver     Date            Person          Note
-        ---     ----            ------          ----
-        V0600   17 Mar 2013     D. Brandl       Initial version                                 
-        V0700   08 Aug 2016     D. Brandl       Updated Version
+        Ver           Date            Person          Note
+        ---           ----            ------          ----
+        BHPBilliton   22 Jun 2015     B. Poole        This is a BHPBilliton specific branch of V0600                                  
 
    </xsd:documentation>
 </xsd:annotation>
