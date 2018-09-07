@@ -1,6 +1,7 @@
 <xsd:schema targetNamespace="http://www.mesa.org/xml/B2MML" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.mesa.org/xml/B2MML" xmlns:Extended="http://www.mesa.org/xml/B2MML-AllExtensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <!-- Include the Core Components schema in the default namespace  -->
     <xsd:include schemaLocation="B2MML-CoreComponents.xsd"/>
+    <xsd:include schemaLocation="B2MML-Material.xsd"/>
     <!-- Import the Common Extension Schema                 -->
     <xsd:import namespace="http://www.mesa.org/xml/B2MML-AllExtensions" schemaLocation="B2MML-CommonExtensions.xsd"/>
     <xsd:annotation>
@@ -111,7 +112,8 @@
           Biogen        20  July 2018     S.Dattenny   Added WorkDefinitionID to PropertyMeasurementType to ensure Property Measurement can be associated with a Work Definition.
           Biogen        20  July 2018     S.Dattenny   Added MaterialLotPropertyID to PropertyMeasurementType to ensure Property Measurement can be associated with a MaterialLotProperty (as Testable Object Property).
           Biogen        20  July 2018     S.Dattenny   Added MaterialLotPropertyID to TestSpecificationEvaluatedPropertyType to ensure Evaluated Property can be associated with multiple MaterialLotProperty (as Testable Object Property)..
-
+          Biogen        06  Sep   2018    S.Dattenny  Changed all IDs to Full elements in OpMaterialRequirementType
+          
         </xsd:documentation>
     </xsd:annotation>
     <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   -->
@@ -708,10 +710,10 @@
     <!--     -->    
     <xsd:complexType name="OpMaterialRequirementType">
         <xsd:sequence>
-            <xsd:element name="MaterialClassID" type="MaterialClassIDType" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="MaterialDefinitionID" type="MaterialDefinitionIDType" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="MaterialLotID" type="MaterialLotIDType" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="MaterialSubLotID" type="MaterialSubLotIDType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MaterialClass" type="MaterialClassType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MaterialDefinition" type="MaterialDefinitionType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MaterialLot" type="MaterialLotType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="MaterialSubLot" type="MaterialSubLotType" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="MaterialUse" type="MaterialUseType" minOccurs="0"/>
             <xsd:element name="StorageLocation" type="StorageLocationType" minOccurs="0"/>
@@ -1012,6 +1014,18 @@
                 <xsd:attribute name="OtherValue" type="xsd:string"/>
             </xsd:extension>
         </xsd:simpleContent>
+    </xsd:complexType>
+    <!--     -->    
+    <!--  OperationalLocationType.  -->
+    <xsd:complexType name="OperationalLocationType">
+        <xsd:sequence>
+            <xsd:element name="ID" type="IdentifierType"/>
+            <xsd:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="HierarchyScope" type="HierarchyScopeType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="OperationalLocation" type="OperationalLocationType" minOccurs="0" maxOccurs="1"/>
+            <!-- <xsd:element name="SpatialDefinition" type="SpatialDefinitionType" minOccurs="0" maxOccurs="1"/> -->
+            <!-- <xsd:group ref="Extended:Location" minOccurs="0" maxOccurs="1"/> -->
+        </xsd:sequence>
     </xsd:complexType>
     <!--     -->    
     <xsd:complexType name="OtherDependencyType">
@@ -1418,8 +1432,22 @@
     </xsd:complexType>
     <!--     -->    
     <xsd:complexType name="StorageLocationType">
+        <xsd:sequence>
+            <xsd:element name="OperationalLocation" type="OperationalLocationType" minOccurs="0"/>
+            <xsd:element name="EquipmentLocation" type="EquipmentIDType" minOccurs="0"/>
+            <xsd:element name="Description" type="DescriptionType" minOccurs="0"/>
+            <xsd:element name="PhysicalAsset" type="PhysicalAssetIDType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!--     -->    
+    <xsd:complexType name="StorageLocation1Type">
         <xsd:simpleContent>
-            <xsd:restriction base="IdentifierType"/>
+            <xsd:restriction base="CodeType">
+                <xsd:enumeration value="Operational Location"/>
+                <xsd:enumeration value="Equipment"/>
+                <xsd:enumeration value="Physical Asset"/>
+                <xsd:enumeration value="Description"/>
+            </xsd:restriction>
         </xsd:simpleContent>
     </xsd:complexType>
     <!--     -->    

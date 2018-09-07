@@ -278,6 +278,10 @@
                                                         minOccurs = "0"/>
       <xsd:element name = "MaterialLotProperty"         type = "MaterialLotPropertyType"
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
+<!-- Aligned to ISA-95 : MaterialLot contains MaterialLot -->
+      <xsd:element name = "MaterialLot"              type = "MaterialLotType"
+                                                        minOccurs = "0" maxOccurs = "unbounded"/>
+
       <xsd:element name = "MaterialSubLot"              type = "MaterialSubLotType"
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "StorageLocation"             type = "StorageHierarchyScopeType"    
@@ -289,8 +293,7 @@
 	  <!-- Temporary Fix: Add MaterialTestSpecification as aggregate -->
       <xsd:element name = "MaterialTestSpecification" type = "MaterialTestSpecificationType"
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-
-														<xsd:element name = "GeospatialDesignation"        type = "GeospatialDesignationType"
+      <xsd:element name = "GeospatialDesignation"        type = "GeospatialDesignationType"
                                                         minOccurs = "0"/>
       <xsd:element name = "AssemblyLotID"               type = "MaterialLotIDType"
                                                         minOccurs = "0" maxOccurs = "unbounded"/>

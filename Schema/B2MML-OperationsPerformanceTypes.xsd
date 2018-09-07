@@ -15,6 +15,13 @@
 <!-- Include the Common schema   -->
 
   <xsd:include  schemaLocation = "B2MML-Common.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-Material.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-Personnel.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-Equipment.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-PhysicalAsset.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-ProcessSegment.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-OperationsDefinition.xsd"/>
+  <xsd:include  schemaLocation = "B2MML-OperationsSchedule.xsd"/>
 
 <xsd:annotation> 
    <xsd:documentation>
@@ -62,11 +69,11 @@
         BHPBilliton   11  Apr 2016    C. Gifford      Added GeoSpatial element to OpEquipmentActualType (as per WD01 p 121)
         BHPBilliton   11  Apr 2016    C. Gifford      Added GeoSpatial element to OpPersonnelActualType (as per WD01 p 119)
         BHPBilliton   11  Apr 2016    C. Gifford      Added GeoSpatial element to OpPhysicalAssetActualType (as per WD01 p 123)
-		Biogen		  27  Aug 2018    S. Dattenny	  Added TestResultTypeelement to OpMaterialActualType (as per WD04 table 220)
-		Biogen		  27  Aug 2018    S. Dattenny	  Added TestResultTypeelement to OpEquipmentActualType (as per WD04 table 212)
-		Biogen		  27  Aug 2018    S. Dattenny	  Added TestResultTypeelement to OpPersonnelActualType (as per WD04 table 208)
-		Biogen		  27  Aug 2018    S. Dattenny	  Added TestResultTypeelement to OpPhysicalAssetActualType (as per WD04 table 216)
-
+        Biogen	      27  Aug 2018    S. Dattenny     Added TestResultTypeelement to OpMaterialActualType (as per WD04 table 220)
+	Biogen	      27  Aug 2018    S. Dattenny     Added TestResultTypeelement to OpEquipmentActualType (as per WD04 table 212)
+	Biogen	      27  Aug 2018    S. Dattenny     Added TestResultTypeelement to OpPersonnelActualType (as per WD04 table 208)
+	Biogen	      27  Aug 2018    S. Dattenny     Added TestResultTypeelement to OpPhysicalAssetActualType (as per WD04 table 216)
+        Biogen        06  Sep 2018    S. Dattenny     Changed all ID references/association to aggregations for OpMaterialActualType, OpEquipmentActualType, OpPersonnelActualType, OpPhysicalAssetActualType
    </xsd:documentation>
 </xsd:annotation>
 
@@ -80,11 +87,11 @@
                                                         minOccurs = "0"/>
       <xsd:element name = "OperationsType"              type = "OperationsTypeType"   
                                                         minOccurs = "0"/>
-      <xsd:element name = "ProcessSegmentID"            type = "ProcessSegmentIDType" 
+      <xsd:element name = "ProcessSegment"            type = "ProcessSegmentType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "OperationsSegmentID"         type = "OperationsSegmentIDType" 
+      <xsd:element name = "OperationsSegment"         type = "OperationsSegmentType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "SegmentRequirementID"        type = "SegmentRequirementIDType" 
+      <xsd:element name = "SegmentRequirement"        type = "OpSegmentRequirementType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "ActualStartTime"             type = "ActualStartTimeType"    
                                                         minOccurs = "0"/>
@@ -135,9 +142,9 @@
                   
   <xsd:complexType name = "OpPersonnelActualType">
     <xsd:sequence>
-      <xsd:element name = "PersonnelClassID"            type = "PersonnelClassIDType"   
+      <xsd:element name = "PersonnelClass"            type = "PersonnelClassType"   
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "PersonID"                    type = "PersonIDType"   
+      <xsd:element name = "Person"                    type = "PersonType"   
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "Description"                 type = "DescriptionType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
@@ -184,9 +191,9 @@
 
   <xsd:complexType name = "OpEquipmentActualType">
     <xsd:sequence>
-      <xsd:element name = "EquipmentClassID"            type = "EquipmentClassIDType"   
+      <xsd:element name = "EquipmentClass"            type = "EquipmentClassType"   
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "EquipmentID"                 type = "EquipmentIDType"        
+      <xsd:element name = "Equipment"                 type = "EquipmentType"        
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "Description"                 type = "DescriptionType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
@@ -232,9 +239,9 @@
 
   <xsd:complexType name = "OpPhysicalAssetActualType">
     <xsd:sequence>
-      <xsd:element name = "PhysicalAssetClassID"        type = "PhysicalAssetClassIDType"   
+      <xsd:element name = "PhysicalAssetClass"        type = "PhysicalAssetClassType"   
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "PhysicalAssetID"             type = "PhysicalAssetIDType"        
+      <xsd:element name = "PhysicalAsset"             type = "PhysicalAssetType"        
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "Description"                 type = "DescriptionType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
@@ -278,19 +285,21 @@
 
   <xsd:complexType name = "OpMaterialActualType">
     <xsd:sequence>
-      <xsd:element name = "MaterialClassID"             type = "MaterialClassIDType" 
+      <xsd:element name = "MaterialClass"             type = "MaterialClassType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "MaterialDefinitionID"        type = "MaterialDefinitionIDType" 
+      <xsd:element name = "MaterialDefinition"        type = "MaterialDefinitionType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "MaterialLot"               type = "MaterialLotType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
-      <xsd:element name = "MaterialSubLotID"            type = "MaterialSubLotIDType" 
+      <xsd:element name = "MaterialSubLot"            type = "MaterialSubLotType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "Description"                 type = "DescriptionType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
       <xsd:element name = "MaterialUse"                 type = "MaterialUseType" 
 	                                                    minOccurs = "0"/>
       <xsd:element name = "StorageLocation"             type = "StorageLocationType"           
+                                                        minOccurs = "0"/>
+      <xsd:element name = "StorageLocationType"             type = "StorageLocation1Type"           
                                                         minOccurs = "0"/>
       <xsd:element name = "Quantity"                    type = "QuantityValueType" 
                                                         minOccurs = "0" maxOccurs = "unbounded"/>
